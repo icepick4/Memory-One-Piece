@@ -43,3 +43,5 @@ export const CARDS_NAMES: string[] = [
     'usopp',
     'zoro'
 ];
+
+export const CARD_BACK: string = './assets/cards/luffy.png';

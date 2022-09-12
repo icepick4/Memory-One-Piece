@@ -10,7 +10,6 @@ import {
 
 import { Board } from './classes/board';
 import { Player } from './classes/player';
-import { Card } from './classes/card';
 let BOARD: Board = new Board();
 START.addEventListener('click', () => {
     clear();

@@ -89,12 +89,7 @@ export class Board {
     }
 
     initCardsImages(cards: Card[]) {
-        cards.forEach((card) => {
-            const cardElement = document.createElement('img');
-            cardElement.src = card.image;
-
-            BOARD_CONTAINER.appendChild(cardElement);
-        });
+        cards.forEach((card) => {});
     }
 
     initDimension() {
