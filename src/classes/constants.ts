@@ -21,3 +21,25 @@ export const PLAYER1SCORE: HTMLElement = document.getElementById(
 export const PLAYER2SCORE: HTMLElement = document.getElementById(
     'player2Score'
 ) as HTMLElement;
+
+export const BOARD_CONTAINER: HTMLElement = document.getElementById(
+    'board'
+) as HTMLElement;
+
+export const CARDS_NAMES: string[] = [
+    'ace',
+    'chopper',
+    'dragon',
+    'francky',
+    'hancock',
+    'kaido',
+    'law',
+    'mihawk',
+    'nami',
+    'newgate',
+    'roger',
+    'robin',
+    'sanji',
+    'usopp',
+    'zoro'
+];

@@ -7,7 +7,7 @@ export class Card {
     constructor(name: string) {
         this.revealed = false;
         this.name = name;
-        this.image = 'assets/images/' + name + '.png';
+        this.image = './assets/cards/' + name + '.png';
     }
 
     reveal() {
