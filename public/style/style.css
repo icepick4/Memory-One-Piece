@@ -1,0 +1,57 @@
+.params {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-right: 10px;
+}
+
+.params :nth-child(2n+1) {
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.params button {
+    font-size: 1.2em;
+}
+
+.container {
+    display: flex;
+}
+
+
+.board {
+    width: 1000px;
+    height: 675px;
+    display: grid;
+    /*put items in rows*/
+    grid-template-columns: repeat(4, 1fr);
+    border: 1px solid rgb(8, 8, 8);
+    /*center the board*/
+    margin: auto;
+    align-items: center;
+    justify-items: center;
+
+}
+
+img {
+    max-width: 75%;
+    max-height: 75%;
+}
+
+
+
+h1 {
+    text-align: center;
+}
+
+h2 {
+    text-align: right;
+    font-size: 3em;
+}
+
+body {
+    overflow-y: hidden;
+    /* Hide vertical scrollbar */
+    overflow-x: hidden;
+    /* Hide horizontal scrollbar */
+}
