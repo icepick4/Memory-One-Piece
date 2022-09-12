@@ -5,12 +5,15 @@ import {
     PLAYER2NAME,
     PLAYER1SCORE,
     PLAYER2SCORE,
-    BOARD_CONTAINER
+    BOARD_CONTAINER,
+    PLAYER1,
+    PLAYER2
 } from './classes/constants';
 
 import { Board } from './classes/board';
 import { Player } from './classes/player';
-let BOARD: Board = new Board();
+import { Card } from './classes/card';
+export const BOARD: Board = new Board();
 START.addEventListener('click', () => {
     clear();
     if (BOARD.playing == false) {
@@ -20,13 +23,12 @@ START.addEventListener('click', () => {
 
 function init() {
     const difficulty: number = getDifficulty(DIFFICULTY.value) as number;
-    const player1Name: string = PLAYER1NAME.value;
-    const player2Name: string = PLAYER2NAME.value;
+    PLAYER1.setName(PLAYER1NAME.value);
+    PLAYER2.setName(PLAYER2NAME.value);
     BOARD.initPlaying(difficulty);
-    const player1: Player = new Player(player1Name);
-    const player2: Player = new Player(player2Name);
-    PLAYER1SCORE.innerHTML = player1.getName().toString();
-    PLAYER2SCORE.innerHTML = player2.getName().toString();
+
+    PLAYER1SCORE.innerHTML = PLAYER1.getName().toString();
+    PLAYER2SCORE.innerHTML = PLAYER2.getName().toString();
 }
 
 function getDifficulty(difficulty: string) {
@@ -43,12 +45,27 @@ function getDifficulty(difficulty: string) {
 }
 
 function clear() {
-    BOARD = new Board();
+    BOARD.clear();
     PLAYER1SCORE.innerHTML = '';
     PLAYER2SCORE.innerHTML = '';
     let child = BOARD_CONTAINER.lastElementChild;
     while (child) {
         BOARD_CONTAINER.removeChild(child);
         child = BOARD_CONTAINER.lastElementChild;
+    }
+}
+
+export function play() {
+    // card.flip();
+    if (BOARD.checkCardsRevealed() != null) {
+        if (PLAYER1.isPlaying()) {
+            PLAYER1.addPoint();
+            PLAYER1SCORE.innerHTML = PLAYER1.getScore().toString();
+        } else {
+            PLAYER2.addPoint();
+            PLAYER2SCORE.innerHTML = PLAYER2.getScore().toString();
+        }
+    } else {
+        BOARD.hideAll();
     }
 }

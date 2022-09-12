@@ -1,3 +1,5 @@
+import { Player } from './player';
+
 export const START: HTMLElement = document.getElementById(
     'start'
 ) as HTMLElement;
@@ -45,3 +47,6 @@ export const CARDS_NAMES: string[] = [
 ];
 
 export const CARD_BACK: string = './assets/cards/luffy.png';
+
+export const PLAYER1: Player = new Player();
+export const PLAYER2: Player = new Player();

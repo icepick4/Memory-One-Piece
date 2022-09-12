@@ -20,11 +20,22 @@ export class Board {
     }
 
     hideAll() {
-        this.cards.forEach((card) => card.hide());
+        this.cards.forEach((card) => (card.revealed ? {} : card.hide()));
     }
 
     toggleAll() {
         this.cards.forEach((card) => card.toggle());
+    }
+
+    //check if two cards are revealed and if they are equals return the name
+    checkCardsRevealed() {
+        let revealedCards = this.cards.filter((card) => card.revealed);
+        if (revealedCards.length === 2) {
+            if (revealedCards[0].equals(revealedCards[1])) {
+                return revealedCards[0].name;
+            }
+        }
+        return null;
     }
 
     initPlaying(difficulty: number) {
@@ -37,59 +48,40 @@ export class Board {
     }
 
     initCards() {
-        console.log(CARDS_NAMES.length);
-        if (this.difficulty === 1) {
-            for (let i = 0; i < (4 * 3) / 2; i++) {
-                let rand1 = Math.floor(Math.random() * CARDS_NAMES.length);
-                let rand2 = Math.floor(Math.random() * this.cards.length);
-                if (!this.checkCard(CARDS_NAMES[rand1])) {
-                    this.cards.push(new Card(CARDS_NAMES[rand1]));
-                    this.cards.splice(rand2, 0, new Card(CARDS_NAMES[rand1]));
-                } else {
-                    i--;
-                }
-            }
-        } else if (this.difficulty === 2) {
-            for (let i = 0; i < (5 * 4) / 2; i++) {
-                let rand1 = Math.floor(Math.random() * CARDS_NAMES.length);
-                let rand2 = Math.floor(Math.random() * this.cards.length);
-                if (!this.checkCard(CARDS_NAMES[rand1])) {
-                    this.cards.push(new Card(CARDS_NAMES[rand1]));
-                    this.cards.splice(rand2, 0, new Card(CARDS_NAMES[rand1]));
-                } else {
-                    i--;
-                }
-            }
-        } else if (this.difficulty === 3) {
-            for (let i = 0; i < (6 * 5) / 2; i++) {
-                let rand1 = Math.floor(Math.random() * CARDS_NAMES.length);
-                let rand2 = Math.floor(Math.random() * this.cards.length);
-                if (!this.checkCard(CARDS_NAMES[rand1])) {
-                    this.cards.push(new Card(CARDS_NAMES[rand1]));
-                    this.cards.splice(rand2, 0, new Card(CARDS_NAMES[rand1]));
-                } else {
-                    i--;
-                }
+        let nbCards: number =
+            ((this.difficulty + 3) * (this.difficulty + 2)) / 2;
+        for (let i = 0; i < nbCards; i++) {
+            let randImage = Math.floor(Math.random() * CARDS_NAMES.length);
+            let randPosition = Math.floor(
+                Math.random() * this.cards.length + 1
+            );
+            if (!this.checkCard(CARDS_NAMES[randImage])) {
+                this.cards.push(new Card(CARDS_NAMES[randImage]));
+                this.cards.splice(
+                    randPosition,
+                    0,
+                    new Card(CARDS_NAMES[randImage])
+                );
+            } else {
+                i--;
             }
         }
+        console.log(this.cards);
     }
 
     checkCard(name: string) {
-        let count = 0;
         this.cards.forEach((card) => {
             if (card.name === name) {
-                count++;
+                return true;
             }
         });
-        if (count === 2) {
-            return true;
-        } else {
-            return false;
-        }
+        return false;
     }
 
     initCardsImages(cards: Card[]) {
-        cards.forEach((card) => {});
+        cards.forEach((card) => {
+            BOARD_CONTAINER.appendChild(card.elementImage);
+        });
     }
 
     initDimension() {
@@ -111,4 +103,31 @@ export class Board {
         BOARD_CONTAINER.style.gridTemplateColumns = `repeat(${this.width}, 1fr)`;
         BOARD_CONTAINER.style.gridTemplateRows = `repeat(${this.height}, 1fr)`;
     }
+
+    clear() {
+        this.cards.forEach((card) => {
+            BOARD_CONTAINER.removeChild(card.elementImage);
+        });
+        this.cards = [];
+    }
+}
+
+function shuffle(array: Card[]) {
+    let currentIndex = array.length,
+        randomIndex;
+
+    // While there remain elements to shuffle.
+    while (currentIndex != 0) {
+        // Pick a remaining element.
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex--;
+
+        // And swap it with the current element.
+        [array[currentIndex], array[randomIndex]] = [
+            array[randomIndex],
+            array[currentIndex]
+        ];
+    }
+
+    return array;
 }

@@ -1,5 +1,6 @@
 /*The class representing a card in the game*/
-import { BOARD_CONTAINER, CARD_BACK } from './constants';
+import { CARD_BACK } from './constants';
+import { play } from '../main';
 
 export class Card {
     revealed: boolean;
@@ -14,14 +15,14 @@ export class Card {
         this.elementImage = cardElement;
         this.elementImage.id = this.name;
         this.elementImage.src = CARD_BACK;
-        this.elementImage.addEventListener('click', () => {
-            this.reveal();
-        });
-        BOARD_CONTAINER.appendChild(this.elementImage);
+        this.elementImage.addEventListener('click', play());
     }
 
     reveal() {
         this.revealed = true;
+    }
+
+    flip() {
         this.elementImage.src = this.image;
     }
 
