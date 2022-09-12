@@ -18,6 +18,13 @@
     display: flex;
 }
 
+.scores {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left: 10px;
+}
+
 
 .board {
     width: 1000px;
