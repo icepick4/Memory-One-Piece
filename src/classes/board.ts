@@ -15,12 +15,12 @@ export class Board {
         this.cards = [];
     }
 
-    revealAll() {
-        this.cards.forEach((card) => card.reveal());
-    }
-
     hideAll() {
-        this.cards.forEach((card) => (card.revealed ? {} : card.hide()));
+        this.cards.forEach((card) => {
+            if (!card.won) {
+                card.hide();
+            }
+        });
     }
 
     toggleAll() {
@@ -29,12 +29,29 @@ export class Board {
 
     //check if two cards are revealed and if they are equals return the name
     checkCardsRevealed() {
-        let revealedCards = this.cards.filter((card) => card.revealed);
-        if (revealedCards.length === 2) {
-            if (revealedCards[0].equals(revealedCards[1])) {
-                return revealedCards[0].name;
+        let cardRevealed: Card;
+        for (let i = 0; i < this.cards.length; i++) {
+            if (this.cards[i].revealed) {
+                cardRevealed = this.cards[i];
+                for (let j = i + 1; j < this.cards.length; j++) {
+                    if (this.cards[j].revealed) {
+                        if (
+                            cardRevealed.equals(this.cards[j]) &&
+                            !this.cards[j].won
+                        ) {
+                            console.log(cardRevealed.name);
+                            cardRevealed.won = true;
+                            this.cards[j].won = true;
+                            if (this.checkEnd()) {
+                                this.playing = false;
+                            }
+                            return cardRevealed.name;
+                        }
+                    }
+                }
             }
         }
+        console.log(this.cards);
         return null;
     }
 
@@ -66,16 +83,25 @@ export class Board {
                 i--;
             }
         }
-        console.log(this.cards);
     }
 
     checkCard(name: string) {
-        this.cards.forEach((card) => {
-            if (card.name === name) {
+        for (let i = 0; i < this.cards.length; i++) {
+            if (this.cards[i].name === name) {
                 return true;
             }
-        });
+        }
         return false;
+    }
+
+    checkEnd() {
+        let end = true;
+        this.cards.forEach((card) => {
+            if (!card.won) {
+                end = false;
+            }
+        });
+        return end;
     }
 
     initCardsImages(cards: Card[]) {

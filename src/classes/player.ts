@@ -39,4 +39,10 @@ export class Player {
     isPlaying() {
         return this.playing;
     }
+
+    clear() {
+        this.name = '';
+        this.score = 0;
+        this.playing = false;
+    }
 }

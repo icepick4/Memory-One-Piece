@@ -28,6 +28,14 @@ export const BOARD_CONTAINER: HTMLElement = document.getElementById(
     'board'
 ) as HTMLElement;
 
+export const SCORE1: HTMLElement = document.getElementById(
+    'score1'
+) as HTMLElement;
+
+export const SCORE2: HTMLElement = document.getElementById(
+    'score2'
+) as HTMLElement;
+
 export const CARDS_NAMES: string[] = [
     'ace',
     'chopper',

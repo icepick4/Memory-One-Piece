@@ -7,27 +7,33 @@ export class Card {
     name: string;
     image: string;
     elementImage: HTMLImageElement;
+    won: boolean;
     constructor(name: string) {
         this.revealed = false;
         this.name = name;
+        this.won = false;
         this.image = './assets/cards/' + name + '.png';
         const cardElement = document.createElement('img');
         this.elementImage = cardElement;
         this.elementImage.id = this.name;
         this.elementImage.src = CARD_BACK;
-        this.elementImage.addEventListener('click', play());
+        this.elementImage.addEventListener('click', () => {
+            play(this);
+        });
     }
 
-    reveal() {
-        this.revealed = true;
+    isWon() {
+        return this.won;
     }
 
     flip() {
         this.elementImage.src = this.image;
+        this.revealed = true;
     }
 
     hide() {
         this.revealed = false;
+        this.elementImage.src = CARD_BACK;
     }
 
     toggle() {

@@ -7,18 +7,19 @@ import {
     PLAYER2SCORE,
     BOARD_CONTAINER,
     PLAYER1,
-    PLAYER2
+    PLAYER2,
+    SCORE1,
+    SCORE2
 } from './classes/constants';
 
 import { Board } from './classes/board';
 import { Player } from './classes/player';
 import { Card } from './classes/card';
 export const BOARD: Board = new Board();
+let counter = 1;
 START.addEventListener('click', () => {
     clear();
-    if (BOARD.playing == false) {
-        init();
-    }
+    init();
 });
 
 function init() {
@@ -48,6 +49,8 @@ function clear() {
     BOARD.clear();
     PLAYER1SCORE.innerHTML = '';
     PLAYER2SCORE.innerHTML = '';
+    PLAYER1.clear();
+    PLAYER2.clear();
     let child = BOARD_CONTAINER.lastElementChild;
     while (child) {
         BOARD_CONTAINER.removeChild(child);
@@ -55,17 +58,34 @@ function clear() {
     }
 }
 
-export function play() {
-    // card.flip();
+export function play(card: Card) {
     if (BOARD.checkCardsRevealed() != null) {
+        console.log('2 cards revealed');
         if (PLAYER1.isPlaying()) {
             PLAYER1.addPoint();
-            PLAYER1SCORE.innerHTML = PLAYER1.getScore().toString();
+            SCORE1.innerHTML = PLAYER1.getScore().toString();
         } else {
             PLAYER2.addPoint();
-            PLAYER2SCORE.innerHTML = PLAYER2.getScore().toString();
+            SCORE2.innerHTML = PLAYER2.getScore().toString();
         }
     } else {
-        BOARD.hideAll();
+        if (counter % 2 == 0) {
+            //wait 1 second before flipping back
+            setTimeout(() => {
+                BOARD.hideAll();
+            }, 1000);
+
+            if (PLAYER1.isPlaying()) {
+                PLAYER1.stopPlaying();
+                PLAYER2.startPlaying();
+            } else {
+                PLAYER2.stopPlaying();
+                PLAYER1.startPlaying();
+            }
+        } else {
+            BOARD.hideAll();
+            card.flip();
+        }
     }
+    counter++;
 }
