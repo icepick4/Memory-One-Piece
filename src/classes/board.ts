@@ -3,28 +3,48 @@ import { Card } from './card';
 import { BOARD_CONTAINER, CARDS_NAMES } from './constants';
 export class Board {
     cards: Card[];
+    revealedCards: Card[];
+    wonCards: Card[];
     difficulty: number;
     width: number;
     height: number;
     playing: boolean;
+
     constructor() {
         this.difficulty = 0;
         this.playing = false;
         this.width = 0;
         this.height = 0;
         this.cards = [];
+        this.revealedCards = [];
+        this.wonCards = [];
     }
 
-    hideAll() {
+    //hide all cards except the won ones and the one passed in parameter
+    hideAll(cardClicked: Card) {
+        let hide: boolean = false;
         this.cards.forEach((card) => {
-            if (!card.won) {
+            if (!card.won && !card.equals(cardClicked)) {
                 card.hide();
+                hide = true;
             }
         });
+        this.revealedCards = [];
+        return hide;
     }
 
-    toggleAll() {
-        this.cards.forEach((card) => card.toggle());
+    nbRevealedCard() {
+        let hide: boolean = false;
+        let ctr = 0;
+        this.cards.forEach((card) => {
+            if (card.revealed && !card.won) {
+                ctr++;
+            }
+        });
+        if (ctr == 2) {
+            hide = true;
+        }
+        return hide;
     }
 
     //check if two cards are revealed and if they are equals return the name
@@ -39,7 +59,6 @@ export class Board {
                             cardRevealed.equals(this.cards[j]) &&
                             !this.cards[j].won
                         ) {
-                            console.log(cardRevealed.name);
                             cardRevealed.won = true;
                             this.cards[j].won = true;
                             if (this.checkEnd()) {
@@ -51,7 +70,6 @@ export class Board {
                 }
             }
         }
-        console.log(this.cards);
         return null;
     }
 
@@ -72,7 +90,7 @@ export class Board {
             let randPosition = Math.floor(
                 Math.random() * this.cards.length + 1
             );
-            if (!this.checkCard(CARDS_NAMES[randImage])) {
+            if (!this.boardContains(CARDS_NAMES[randImage])) {
                 this.cards.push(new Card(CARDS_NAMES[randImage]));
                 this.cards.splice(
                     randPosition,
@@ -85,7 +103,7 @@ export class Board {
         }
     }
 
-    checkCard(name: string) {
+    boardContains(name: string) {
         for (let i = 0; i < this.cards.length; i++) {
             if (this.cards[i].name === name) {
                 return true;
@@ -135,25 +153,7 @@ export class Board {
             BOARD_CONTAINER.removeChild(card.elementImage);
         });
         this.cards = [];
+        this.wonCards = [];
+        this.revealedCards = [];
     }
-}
-
-function shuffle(array: Card[]) {
-    let currentIndex = array.length,
-        randomIndex;
-
-    // While there remain elements to shuffle.
-    while (currentIndex != 0) {
-        // Pick a remaining element.
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex--;
-
-        // And swap it with the current element.
-        [array[currentIndex], array[randomIndex]] = [
-            array[randomIndex],
-            array[currentIndex]
-        ];
-    }
-
-    return array;
 }

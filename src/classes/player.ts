@@ -1,24 +1,27 @@
+import { TITLE } from './constants';
+
 export class Player {
     name: string;
     score: number;
     playing: boolean;
-    constructor() {
+    scoreHTML: HTMLElement;
+    constructor(scoreHTML: HTMLElement) {
         this.name = '';
         this.score = 0;
         this.playing = false;
+        this.scoreHTML = scoreHTML;
     }
 
     // Add a point to the player's score
     addPoint() {
         this.score++;
+        this.scoreHTML.innerHTML = this.score.toString();
     }
 
-    // Get the player's score
     getScore() {
         return this.score;
     }
 
-    // Get the player's name
     getName() {
         return this.name;
     }
@@ -33,6 +36,7 @@ export class Player {
     }
 
     startPlaying() {
+        TITLE.innerHTML = this.name + ' is playing';
         this.playing = true;
     }
 

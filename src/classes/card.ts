@@ -1,5 +1,5 @@
 /*The class representing a card in the game*/
-import { CARD_BACK } from './constants';
+import { BOARD, CARD_BACK } from './constants';
 import { play } from '../main';
 
 export class Card {
@@ -22,10 +22,6 @@ export class Card {
         });
     }
 
-    isWon() {
-        return this.won;
-    }
-
     flip() {
         this.elementImage.src = this.image;
         this.revealed = true;
@@ -34,14 +30,6 @@ export class Card {
     hide() {
         this.revealed = false;
         this.elementImage.src = CARD_BACK;
-    }
-
-    toggle() {
-        this.revealed = !this.revealed;
-    }
-
-    toString() {
-        return this.name;
     }
 
     equals(other: Card) {

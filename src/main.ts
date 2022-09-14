@@ -8,14 +8,11 @@ import {
     BOARD_CONTAINER,
     PLAYER1,
     PLAYER2,
-    SCORE1,
-    SCORE2
+    BOARD,
+    TITLE
 } from './classes/constants';
 
-import { Board } from './classes/board';
-import { Player } from './classes/player';
 import { Card } from './classes/card';
-export const BOARD: Board = new Board();
 let counter = 1;
 START.addEventListener('click', () => {
     clear();
@@ -26,10 +23,41 @@ function init() {
     const difficulty: number = getDifficulty(DIFFICULTY.value) as number;
     PLAYER1.setName(PLAYER1NAME.value);
     PLAYER2.setName(PLAYER2NAME.value);
-    BOARD.initPlaying(difficulty);
+    PLAYER1SCORE.innerHTML = PLAYER1.name;
+    PLAYER2SCORE.innerHTML = PLAYER2.name;
 
-    PLAYER1SCORE.innerHTML = PLAYER1.getName().toString();
-    PLAYER2SCORE.innerHTML = PLAYER2.getName().toString();
+    BOARD.initPlaying(difficulty);
+    PLAYER1.startPlaying();
+}
+
+export function play(card: Card) {
+    if (!BOARD.nbRevealedCard()) {
+        card.flip();
+    } else {
+        return;
+    }
+    if (BOARD.checkCardsRevealed() != null) {
+        if (PLAYER1.isPlaying()) {
+            PLAYER1.addPoint();
+        } else {
+            PLAYER2.addPoint();
+        }
+        switchPlayers();
+        if (BOARD.checkEnd()) {
+            TITLE.innerHTML = getEndMessage() as string;
+        }
+    } else {
+        if (counter % 2 == 0) {
+            //wait 1 second before flipping back
+            setTimeout(() => {
+                BOARD.hideAll({} as Card);
+                switchPlayers();
+            }, 1000);
+        } else {
+            BOARD.hideAll(card);
+        }
+    }
+    counter++;
 }
 
 function getDifficulty(difficulty: string) {
@@ -47,8 +75,6 @@ function getDifficulty(difficulty: string) {
 
 function clear() {
     BOARD.clear();
-    PLAYER1SCORE.innerHTML = '';
-    PLAYER2SCORE.innerHTML = '';
     PLAYER1.clear();
     PLAYER2.clear();
     let child = BOARD_CONTAINER.lastElementChild;
@@ -58,34 +84,43 @@ function clear() {
     }
 }
 
-export function play(card: Card) {
-    if (BOARD.checkCardsRevealed() != null) {
-        console.log('2 cards revealed');
-        if (PLAYER1.isPlaying()) {
-            PLAYER1.addPoint();
-            SCORE1.innerHTML = PLAYER1.getScore().toString();
-        } else {
-            PLAYER2.addPoint();
-            SCORE2.innerHTML = PLAYER2.getScore().toString();
-        }
+function switchPlayers() {
+    if (PLAYER1.isPlaying()) {
+        PLAYER1.stopPlaying();
+        PLAYER2.startPlaying();
     } else {
-        if (counter % 2 == 0) {
-            //wait 1 second before flipping back
-            setTimeout(() => {
-                BOARD.hideAll();
-            }, 1000);
-
-            if (PLAYER1.isPlaying()) {
-                PLAYER1.stopPlaying();
-                PLAYER2.startPlaying();
-            } else {
-                PLAYER2.stopPlaying();
-                PLAYER1.startPlaying();
-            }
-        } else {
-            BOARD.hideAll();
-            card.flip();
-        }
+        PLAYER2.stopPlaying();
+        PLAYER1.startPlaying();
     }
-    counter++;
+}
+
+function getEndMessage() {
+    if (PLAYER1.getScore() > PLAYER2.getScore()) {
+        const message: string =
+            PLAYER1.getName() +
+            ' won with ' +
+            PLAYER1.getScore().toString() +
+            ' points against ' +
+            PLAYER2.getName() +
+            'who had ' +
+            PLAYER2.getScore.toString() +
+            ' points.';
+        return message;
+    } else if (PLAYER1.getScore() < PLAYER2.getScore()) {
+        const message: string =
+            PLAYER2.getName() +
+            ' won with ' +
+            PLAYER2.getScore().toString() +
+            ' points against ' +
+            PLAYER1.getName() +
+            'who had ' +
+            PLAYER1.getScore.toString() +
+            ' points.';
+    } else {
+        return (
+            'Draw, both players have ' +
+            PLAYER1.getScore().toString() +
+            ' points.'
+        );
+    }
 }

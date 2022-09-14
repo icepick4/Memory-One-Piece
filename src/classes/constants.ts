@@ -1,4 +1,5 @@
 import { Player } from './player';
+import { Board } from './board';
 
 export const START: HTMLElement = document.getElementById(
     'start'
@@ -56,5 +57,11 @@ export const CARDS_NAMES: string[] = [
 
 export const CARD_BACK: string = './assets/cards/luffy.png';
 
-export const PLAYER1: Player = new Player();
-export const PLAYER2: Player = new Player();
+export const PLAYER1: Player = new Player(SCORE1);
+export const PLAYER2: Player = new Player(SCORE2);
+
+export const BOARD: Board = new Board();
+
+export const TITLE: HTMLElement = document.getElementById(
+    'title'
+) as HTMLElement;
