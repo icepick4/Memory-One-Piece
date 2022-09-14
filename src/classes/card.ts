@@ -15,7 +15,6 @@ export class Card {
         this.image = './assets/cards/' + name + '.png';
         const cardElement = document.createElement('img');
         this.elementImage = cardElement;
-        this.elementImage.id = this.name;
         this.elementImage.src = CARD_BACK;
         this.elementImage.addEventListener('click', () => {
             play(this);
