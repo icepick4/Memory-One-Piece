@@ -1,5 +1,5 @@
 /*The class representing a card in the game*/
-import { BOARD, CARD_BACK } from './constants';
+import { CARD_BACK } from './constants';
 import { play } from '../main';
 
 export class Card {
@@ -22,7 +22,7 @@ export class Card {
         });
     }
 
-    flip() {
+    reveal() {
         this.elementImage.src = this.image;
         this.revealed = true;
     }

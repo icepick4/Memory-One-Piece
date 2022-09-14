@@ -20,8 +20,17 @@ export class Board {
         this.wonCards = [];
     }
 
+    initPlaying(difficulty: number) {
+        this.difficulty = difficulty;
+        this.initCardsArray();
+        this.initCardsImages(this.cards);
+        this.initDimension();
+        this.initBoardGrid();
+        this.playing = true;
+    }
+
     //hide all cards except the won ones and the one passed in parameter
-    hideAll(cardClicked: Card) {
+    hideAllNotWon(cardClicked: Card) {
         let hide: boolean = false;
         this.cards.forEach((card) => {
             if (!card.won && !card.equals(cardClicked)) {
@@ -33,8 +42,8 @@ export class Board {
         return hide;
     }
 
-    nbRevealedCard() {
-        let hide: boolean = false;
+    turnEnded() {
+        let ended: boolean = false;
         let ctr = 0;
         this.cards.forEach((card) => {
             if (card.revealed && !card.won) {
@@ -42,9 +51,9 @@ export class Board {
             }
         });
         if (ctr == 2) {
-            hide = true;
+            ended = true;
         }
-        return hide;
+        return ended;
     }
 
     //check if two cards are revealed and if they are equals return the name
@@ -52,55 +61,27 @@ export class Board {
         let cardRevealed: Card;
         for (let i = 0; i < this.cards.length; i++) {
             if (this.cards[i].revealed) {
+                //store the first card revealed of the list
                 cardRevealed = this.cards[i];
+                //browse the list to find another card revealed
                 for (let j = i + 1; j < this.cards.length; j++) {
-                    if (this.cards[j].revealed) {
-                        if (
-                            cardRevealed.equals(this.cards[j]) &&
-                            !this.cards[j].won
-                        ) {
-                            cardRevealed.won = true;
-                            this.cards[j].won = true;
-                            if (this.checkEnd()) {
-                                this.playing = false;
-                            }
-                            return cardRevealed.name;
+                    //if both cards are revealed and equals -> return the name and check for the end of the game
+                    if (
+                        this.cards[j].revealed &&
+                        this.cards[j].equals(cardRevealed) &&
+                        !this.cards[j].won
+                    ) {
+                        cardRevealed.won = true;
+                        this.cards[j].won = true;
+                        if (this.checkEnd()) {
+                            this.playing = false;
                         }
+                        return cardRevealed.name;
                     }
                 }
             }
         }
         return null;
-    }
-
-    initPlaying(difficulty: number) {
-        this.difficulty = difficulty;
-        this.initCards();
-        this.initCardsImages(this.cards);
-        this.initDimension();
-        this.initBoardGrid();
-        this.playing = true;
-    }
-
-    initCards() {
-        let nbCards: number =
-            ((this.difficulty + 3) * (this.difficulty + 2)) / 2;
-        for (let i = 0; i < nbCards; i++) {
-            let randImage = Math.floor(Math.random() * CARDS_NAMES.length);
-            let randPosition = Math.floor(
-                Math.random() * this.cards.length + 1
-            );
-            if (!this.boardContains(CARDS_NAMES[randImage])) {
-                this.cards.push(new Card(CARDS_NAMES[randImage]));
-                this.cards.splice(
-                    randPosition,
-                    0,
-                    new Card(CARDS_NAMES[randImage])
-                );
-            } else {
-                i--;
-            }
-        }
     }
 
     boardContains(name: string) {
@@ -128,6 +109,27 @@ export class Board {
         });
     }
 
+    initCardsArray() {
+        let nbCards: number =
+            ((this.difficulty + 3) * (this.difficulty + 2)) / 2;
+        for (let i = 0; i < nbCards; i++) {
+            let randImage = Math.floor(Math.random() * CARDS_NAMES.length);
+            let randPosition = Math.floor(
+                Math.random() * this.cards.length + 1
+            );
+            if (!this.boardContains(CARDS_NAMES[randImage])) {
+                this.cards.push(new Card(CARDS_NAMES[randImage]));
+                this.cards.splice(
+                    randPosition,
+                    0,
+                    new Card(CARDS_NAMES[randImage])
+                );
+            } else {
+                i--;
+            }
+        }
+    }
+
     initDimension() {
         if (this.difficulty === 1) {
             this.width = 4;
@@ -153,7 +155,5 @@ export class Board {
             BOARD_CONTAINER.removeChild(card.elementImage);
         });
         this.cards = [];
-        this.wonCards = [];
-        this.revealedCards = [];
     }
 }

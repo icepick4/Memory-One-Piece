@@ -11,9 +11,9 @@ import {
     BOARD,
     TITLE
 } from './classes/constants';
-
 import { Card } from './classes/card';
 let counter = 1;
+
 START.addEventListener('click', () => {
     clear();
     init();
@@ -31,8 +31,8 @@ function init() {
 }
 
 export function play(card: Card) {
-    if (!BOARD.nbRevealedCard()) {
-        card.flip();
+    if (!BOARD.turnEnded() && !card.revealed && !card.won) {
+        card.reveal();
     } else {
         return;
     }
@@ -50,11 +50,11 @@ export function play(card: Card) {
         if (counter % 2 == 0) {
             //wait 1 second before flipping back
             setTimeout(() => {
-                BOARD.hideAll({} as Card);
+                BOARD.hideAllNotWon({} as Card);
                 switchPlayers();
             }, 1000);
         } else {
-            BOARD.hideAll(card);
+            BOARD.hideAllNotWon(card);
         }
     }
     counter++;
@@ -95,32 +95,32 @@ function switchPlayers() {
 }
 
 function getEndMessage() {
+    let message: string;
     if (PLAYER1.getScore() > PLAYER2.getScore()) {
-        const message: string =
+        message =
             PLAYER1.getName() +
             ' won with ' +
             PLAYER1.getScore().toString() +
             ' points against ' +
             PLAYER2.getName() +
-            'who had ' +
-            PLAYER2.getScore.toString() +
+            ' who had ' +
+            PLAYER2.getScore().toString() +
             ' points.';
-        return message;
     } else if (PLAYER1.getScore() < PLAYER2.getScore()) {
-        const message: string =
+        message =
             PLAYER2.getName() +
             ' won with ' +
             PLAYER2.getScore().toString() +
             ' points against ' +
             PLAYER1.getName() +
-            'who had ' +
-            PLAYER1.getScore.toString() +
+            ' who had ' +
+            PLAYER1.getScore().toString() +
             ' points.';
     } else {
-        return (
-            'Draw, both players have ' +
+        message =
+            'It was a tie! Both players have ' +
             PLAYER1.getScore().toString() +
-            ' points.'
-        );
+            ' points.';
     }
+    return message;
 }
