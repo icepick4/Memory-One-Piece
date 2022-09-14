@@ -33,6 +33,10 @@ function init() {
 export function play(card: Card) {
     if (!BOARD.turnEnded() && !card.revealed && !card.won) {
         card.reveal();
+        card.elementImage.classList.remove('card-revealed');
+        window.requestAnimationFrame(function () {
+            card.elementImage.classList.add('card-revealed');
+        });
     } else {
         return;
     }

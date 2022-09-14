@@ -15,7 +15,9 @@ export class Card {
         this.image = './assets/cards/' + name + '.png';
         const cardElement = document.createElement('img');
         this.elementImage = cardElement;
+        this.elementImage.id = 'back';
         this.elementImage.src = CARD_BACK;
+        this.elementImage.classList.add('card-revealed');
         this.elementImage.addEventListener('click', () => {
             play(this);
         });
@@ -23,12 +25,14 @@ export class Card {
 
     reveal() {
         this.elementImage.src = this.image;
+        this.elementImage.id = 'front';
         this.revealed = true;
     }
 
     hide() {
         this.revealed = false;
         this.elementImage.src = CARD_BACK;
+        this.elementImage.id = 'back';
     }
 
     equals(other: Card) {
