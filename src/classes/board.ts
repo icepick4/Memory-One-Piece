@@ -157,5 +157,6 @@ export class Board {
             BOARD_CONTAINER.removeChild(card.elementImage);
         });
         this.cards = [];
+        this.mode = CHECKBOX.checked ? 'dual' : 'single';
     }
 }

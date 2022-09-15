@@ -56,6 +56,7 @@ export function play(card: Card) {
     } else {
         return;
     }
+    console.log(BOARD.mode);
     if (BOARD.checkCardsRevealed() != null) {
         if (BOARD.mode == 'dual') {
             if (PLAYER1.isPlaying()) {
@@ -63,22 +64,26 @@ export function play(card: Card) {
             } else {
                 PLAYER2.addPoint();
             }
-            if (BOARD.checkEnd()) {
-                TITLE.innerHTML = getEndMessage() as string;
-            }
-        } else {
-            TITLE.innerHTML = counter.toString();
+        }
+        if (BOARD.checkEnd()) {
+            TITLE.innerHTML = getEndMessage() as string;
         }
     } else {
         if (counter % 2 == 0) {
             //wait 1 second before flipping back
             setTimeout(() => {
                 BOARD.hideAllNotWon({} as Card);
-                switchPlayers();
+                if (BOARD.mode == 'dual') {
+                    switchPlayers();
+                }
             }, 1000);
         } else {
             BOARD.hideAllNotWon(card);
         }
+    }
+    if (BOARD.mode == 'single') {
+        TITLE.innerHTML =
+            'Coups :' + ((counter - (counter % 2)) / 2).toString();
     }
 
     counter++;
@@ -103,6 +108,7 @@ function clear() {
     PLAYER2.clear();
     SCORE1.innerHTML = '0';
     SCORE2.innerHTML = '0';
+    TITLE.innerHTML = 'Memory One Piece';
     let child = BOARD_CONTAINER.lastElementChild;
     while (child) {
         BOARD_CONTAINER.removeChild(child);
@@ -112,6 +118,7 @@ function clear() {
 
 function switchPlayers() {
     if (BOARD.mode == 'dual') {
+        console.log('oui je suis en mode dual');
         if (PLAYER1.isPlaying()) {
             PLAYER1.stopPlaying();
             PLAYER2.startPlaying();

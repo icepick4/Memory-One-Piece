@@ -42,7 +42,7 @@
 
 
 #board {
-    width: 1050px;
+    width: 1000px;
     height: 650px;
     display: grid;
     /*put items in rows*/
@@ -77,8 +77,8 @@
 }
 
 img {
-    max-width: 90%;
-    max-height: 90%;
+    max-width: 85%;
+    max-height: 85%;
 }
 
 #back:hover {
@@ -107,19 +107,16 @@ h2 {
 }
 
 #start {
-    background-color: #98a39a;
+    background-color: rgba(0, 0, 0, 0);
     border-radius: 12px;
-    border: 2px solid #000000;
     cursor: pointer;
     color: #000000;
     font-family: 'OnePiece';
-    font-size: 30px;
-    padding: 10px 14px;
+    font-size: 4em;
+    padding: 5px 9px;
     text-decoration: none;
     margin: 40px;
     display: block;
-
-
 }
 
 label {
