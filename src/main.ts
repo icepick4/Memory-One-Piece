@@ -9,7 +9,9 @@ import {
     PLAYER1,
     PLAYER2,
     BOARD,
-    TITLE
+    TITLE,
+    SCORE1,
+    SCORE2
 } from './classes/constants';
 import { Card } from './classes/card';
 let counter = 1;
@@ -80,6 +82,8 @@ function clear() {
     BOARD.clear();
     PLAYER1.clear();
     PLAYER2.clear();
+    SCORE1.innerHTML = '0';
+    SCORE2.innerHTML = '0';
     let child = BOARD_CONTAINER.lastElementChild;
     while (child) {
         BOARD_CONTAINER.removeChild(child);
