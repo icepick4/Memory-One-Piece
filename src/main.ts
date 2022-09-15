@@ -46,7 +46,6 @@ export function play(card: Card) {
         } else {
             PLAYER2.addPoint();
         }
-        switchPlayers();
         if (BOARD.checkEnd()) {
             TITLE.innerHTML = getEndMessage() as string;
         }
