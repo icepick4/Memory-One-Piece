@@ -20,7 +20,7 @@ export class Card {
         this.elementImage.style.borderRadius = '10px';
         this.elementImage.src = CARD_BACK;
         this.elementImage.classList.add('transition');
-        rotate(this);
+        rotate(this, 300);
         this.elementImage.addEventListener('click', () => {
             play(this);
         });
@@ -36,7 +36,7 @@ export class Card {
         this.revealed = false;
         this.elementImage.src = CARD_BACK;
         this.elementImage.id = 'back';
-        rotate(this);
+        rotate(this, 300);
     }
 
     equals(other: Card) {

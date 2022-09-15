@@ -19,7 +19,7 @@ export class Board {
         this.cards = [];
         this.revealedCards = [];
         this.wonCards = [];
-        this.mode = CHECKBOX.checked ? 'dual' : 'single';
+        this.mode = CHECKBOX.checked ? 'single' : 'dual';
     }
 
     initPlaying(difficulty: number) {
@@ -157,6 +157,6 @@ export class Board {
             BOARD_CONTAINER.removeChild(card.elementImage);
         });
         this.cards = [];
-        this.mode = CHECKBOX.checked ? 'dual' : 'single';
+        this.mode = CHECKBOX.checked ? 'single' : 'dual';
     }
 }

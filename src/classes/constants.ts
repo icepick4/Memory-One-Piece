@@ -75,9 +75,9 @@ export const TITLE: HTMLElement = document.getElementById(
     'title'
 ) as HTMLElement;
 
-export function rotate(card: Card) {
+export function rotate(card: Card, speed: number) {
     card.elementImage.style.transform = 'rotateY(180deg)';
-    setTimeout(() => {
+    const rotating = setTimeout(() => {
         card.elementImage.style.transform = 'rotateY(0deg)';
-    }, 300);
+    }, speed);
 }

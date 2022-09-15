@@ -52,7 +52,7 @@ function init() {
 export function play(card: Card) {
     if (!BOARD.turnEnded() && !card.revealed && !card.won) {
         card.reveal();
-        rotate(card);
+        rotate(card, 300);
     } else {
         return;
     }
@@ -109,6 +109,7 @@ function clear() {
     SCORE1.innerHTML = '0';
     SCORE2.innerHTML = '0';
     TITLE.innerHTML = 'Memory One Piece';
+    counter = 1;
     let child = BOARD_CONTAINER.lastElementChild;
     while (child) {
         BOARD_CONTAINER.removeChild(child);
