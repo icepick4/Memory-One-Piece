@@ -16,8 +16,7 @@ export class Card {
         const cardElement = document.createElement('img');
         this.elementImage = cardElement;
         this.elementImage.id = 'back';
-        this.elementImage.style.backgroundColor = 'white';
-        this.elementImage.style.borderRadius = '10px';
+        this.elementImage.classList.add('card');
         this.elementImage.src = CARD_BACK;
         this.elementImage.classList.add('transition');
         rotate(this, 300);
