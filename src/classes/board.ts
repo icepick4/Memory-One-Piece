@@ -33,7 +33,7 @@ export class Board {
     hideAllNotWon(cardClicked: Card) {
         let hide: boolean = false;
         this.cards.forEach((card) => {
-            if (!card.won && !card.equals(cardClicked)) {
+            if (!card.won && !card.equals(cardClicked) && card.revealed) {
                 card.hide();
                 hide = true;
             }

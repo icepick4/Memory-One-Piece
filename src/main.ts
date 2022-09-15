@@ -33,10 +33,10 @@ function init() {
 export function play(card: Card) {
     if (!BOARD.turnEnded() && !card.revealed && !card.won) {
         card.reveal();
-        card.elementImage.classList.remove('card-revealed');
-        window.requestAnimationFrame(function () {
-            card.elementImage.classList.add('card-revealed');
-        });
+        card.elementImage.style.transform = 'rotateY(180deg)';
+        setTimeout(() => {
+            card.elementImage.style.transform = 'rotateY(0deg)';
+        }, 310);
     } else {
         return;
     }

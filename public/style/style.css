@@ -49,36 +49,16 @@ img {
     cursor: pointer;
     /*effect on the image on hover*/
     transform: scale(1.1);
-    transition: 0.5s;
 }
 
 #back {
     /*effect on the image on hover*/
     transform: scale(1);
+}
+
+.transition {
     transition: 0.5s;
 }
-
-.card-revealed {
-    /*make the card turn around*/
-    animation: rotate 0.5s alternate-reverse;
-}
-
-
-
-@keyframes rotate {
-    from {
-        transform: rotateY(0deg);
-    }
-
-    to {
-        transform: rotateY(180deg);
-    }
-}
-
-
-
-
-
 
 h1 {
     text-align: center;

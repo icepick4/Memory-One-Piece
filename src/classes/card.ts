@@ -17,7 +17,7 @@ export class Card {
         this.elementImage = cardElement;
         this.elementImage.id = 'back';
         this.elementImage.src = CARD_BACK;
-        this.elementImage.classList.add('card-revealed');
+        this.elementImage.classList.add('transition');
         this.elementImage.addEventListener('click', () => {
             play(this);
         });
@@ -33,6 +33,10 @@ export class Card {
         this.revealed = false;
         this.elementImage.src = CARD_BACK;
         this.elementImage.id = 'back';
+        this.elementImage.style.transform = 'rotateY(180deg)';
+        setTimeout(() => {
+            this.elementImage.style.transform = 'rotateY(0deg)';
+        }, 310);
     }
 
     equals(other: Card) {
