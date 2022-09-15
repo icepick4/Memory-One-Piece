@@ -1,6 +1,6 @@
 /*Class representing the board containg Cards*/
 import { Card } from './card';
-import { BOARD_CONTAINER, CARDS_NAMES } from './constants';
+import { BOARD_CONTAINER, CARDS_NAMES, CHECKBOX } from './constants';
 export class Board {
     cards: Card[];
     revealedCards: Card[];
@@ -9,6 +9,7 @@ export class Board {
     width: number;
     height: number;
     playing: boolean;
+    mode: string;
 
     constructor() {
         this.difficulty = 0;
@@ -18,6 +19,7 @@ export class Board {
         this.cards = [];
         this.revealedCards = [];
         this.wonCards = [];
+        this.mode = CHECKBOX.checked ? 'dual' : 'single';
     }
 
     initPlaying(difficulty: number) {

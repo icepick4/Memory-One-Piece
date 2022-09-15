@@ -38,6 +38,14 @@ export const SCORE2: HTMLElement = document.getElementById(
     'score2'
 ) as HTMLElement;
 
+export const CHECKBOX: HTMLInputElement = document.getElementById(
+    'checkbox'
+) as HTMLInputElement;
+
+export const DUAL_MODE_TAGS: HTMLCollection = document.getElementsByClassName(
+    'dual-mode'
+) as HTMLCollection;
+
 export const CARDS_NAMES: string[] = [
     'ace',
     'chopper',

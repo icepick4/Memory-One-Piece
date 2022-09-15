@@ -12,7 +12,9 @@ import {
     TITLE,
     SCORE1,
     SCORE2,
-    rotate
+    rotate,
+    CHECKBOX,
+    DUAL_MODE_TAGS
 } from './classes/constants';
 import { Card } from './classes/card';
 let counter = 1;
@@ -20,6 +22,18 @@ let counter = 1;
 START.addEventListener('click', () => {
     clear();
     init();
+});
+
+CHECKBOX.addEventListener('change', () => {
+    if (CHECKBOX.checked) {
+        for (let i = 0; i < DUAL_MODE_TAGS.length; i++) {
+            DUAL_MODE_TAGS[i].classList.add('hidden');
+        }
+    } else {
+        for (let i = 0; i < DUAL_MODE_TAGS.length; i++) {
+            DUAL_MODE_TAGS[i].classList.remove('hidden');
+        }
+    }
 });
 
 function init() {
@@ -30,7 +44,9 @@ function init() {
     PLAYER2SCORE.innerHTML = PLAYER2.name;
 
     BOARD.initPlaying(difficulty);
-    PLAYER1.startPlaying();
+    if (BOARD.mode == 'dual') {
+        PLAYER1.startPlaying();
+    }
 }
 
 export function play(card: Card) {
@@ -41,13 +57,17 @@ export function play(card: Card) {
         return;
     }
     if (BOARD.checkCardsRevealed() != null) {
-        if (PLAYER1.isPlaying()) {
-            PLAYER1.addPoint();
+        if (BOARD.mode == 'dual') {
+            if (PLAYER1.isPlaying()) {
+                PLAYER1.addPoint();
+            } else {
+                PLAYER2.addPoint();
+            }
+            if (BOARD.checkEnd()) {
+                TITLE.innerHTML = getEndMessage() as string;
+            }
         } else {
-            PLAYER2.addPoint();
-        }
-        if (BOARD.checkEnd()) {
-            TITLE.innerHTML = getEndMessage() as string;
+            TITLE.innerHTML = counter.toString();
         }
     } else {
         if (counter % 2 == 0) {
@@ -60,6 +80,7 @@ export function play(card: Card) {
             BOARD.hideAllNotWon(card);
         }
     }
+
     counter++;
 }
 
@@ -90,12 +111,14 @@ function clear() {
 }
 
 function switchPlayers() {
-    if (PLAYER1.isPlaying()) {
-        PLAYER1.stopPlaying();
-        PLAYER2.startPlaying();
-    } else {
-        PLAYER2.stopPlaying();
-        PLAYER1.startPlaying();
+    if (BOARD.mode == 'dual') {
+        if (PLAYER1.isPlaying()) {
+            PLAYER1.stopPlaying();
+            PLAYER2.startPlaying();
+        } else {
+            PLAYER2.stopPlaying();
+            PLAYER1.startPlaying();
+        }
     }
 }
 
