@@ -1,5 +1,6 @@
 import { Player } from './player';
 import { Board } from './board';
+import { Card } from './card';
 
 export const START: HTMLElement = document.getElementById(
     'start'
@@ -65,3 +66,10 @@ export const BOARD: Board = new Board();
 export const TITLE: HTMLElement = document.getElementById(
     'title'
 ) as HTMLElement;
+
+export function rotate(card: Card) {
+    card.elementImage.style.transform = 'rotateY(180deg)';
+    setTimeout(() => {
+        card.elementImage.style.transform = 'rotateY(0deg)';
+    }, 300);
+}

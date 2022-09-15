@@ -11,7 +11,8 @@ import {
     BOARD,
     TITLE,
     SCORE1,
-    SCORE2
+    SCORE2,
+    rotate
 } from './classes/constants';
 import { Card } from './classes/card';
 let counter = 1;
@@ -35,10 +36,7 @@ function init() {
 export function play(card: Card) {
     if (!BOARD.turnEnded() && !card.revealed && !card.won) {
         card.reveal();
-        card.elementImage.style.transform = 'rotateY(180deg)';
-        setTimeout(() => {
-            card.elementImage.style.transform = 'rotateY(0deg)';
-        }, 310);
+        rotate(card);
     } else {
         return;
     }

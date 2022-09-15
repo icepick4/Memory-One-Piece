@@ -1,5 +1,5 @@
 /*The class representing a card in the game*/
-import { CARD_BACK } from './constants';
+import { CARD_BACK, rotate } from './constants';
 import { play } from '../main';
 
 export class Card {
@@ -18,6 +18,7 @@ export class Card {
         this.elementImage.id = 'back';
         this.elementImage.src = CARD_BACK;
         this.elementImage.classList.add('transition');
+        rotate(this);
         this.elementImage.addEventListener('click', () => {
             play(this);
         });
@@ -33,10 +34,7 @@ export class Card {
         this.revealed = false;
         this.elementImage.src = CARD_BACK;
         this.elementImage.id = 'back';
-        this.elementImage.style.transform = 'rotateY(180deg)';
-        setTimeout(() => {
-            this.elementImage.style.transform = 'rotateY(0deg)';
-        }, 310);
+        rotate(this);
     }
 
     equals(other: Card) {
