@@ -184,3 +184,26 @@ span {
 * {
     font-family: 'OnePiece';
 }
+
+
+@media only screen and (hover: none) and (pointer: coarse) {
+
+    .container {
+        display: block;
+    }
+
+    #board {
+        width: 100%;
+        height: 100%;
+    }
+
+    body {
+        overflow-y: visible;
+        overflow-x: visible;
+    }
+
+    .scores {
+        align-items: center;
+
+    }
+}
