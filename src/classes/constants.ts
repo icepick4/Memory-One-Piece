@@ -50,7 +50,7 @@ export const CARDS_NAMES: string[] = [
     'ace',
     'chopper',
     'dragon',
-    'francky',
+    'franky',
     'hancock',
     'kaido',
     'law',
@@ -63,6 +63,10 @@ export const CARDS_NAMES: string[] = [
     'usopp',
     'zoro'
 ];
+
+export const CARDS_PATH: string = './assets/cards/';
+
+export const SOUNDS_PATH: string = './assets/sounds/';
 
 export const CARD_BACK: string = './assets/cards/luffy.png';
 

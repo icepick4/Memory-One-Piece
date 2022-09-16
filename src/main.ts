@@ -14,7 +14,8 @@ import {
     SCORE2,
     rotate,
     CHECKBOX,
-    DUAL_MODE_TAGS
+    DUAL_MODE_TAGS,
+    SOUNDS_PATH
 } from './classes/constants';
 import { Card } from './classes/card';
 let counter = 1;
@@ -58,6 +59,9 @@ export function play(card: Card) {
     }
     console.log(BOARD.mode);
     if (BOARD.checkCardsRevealed() != null) {
+        var audio = new Audio(SOUNDS_PATH + card.name + '.mp3');
+        audio.volume = 0.65;
+        audio.play();
         if (BOARD.mode == 'dual') {
             if (PLAYER1.isPlaying()) {
                 PLAYER1.addPoint();
@@ -67,23 +71,24 @@ export function play(card: Card) {
         }
         if (BOARD.checkEnd()) {
             TITLE.innerHTML = getEndMessage() as string;
+            return;
         }
     } else {
         if (counter % 2 == 0) {
-            //wait 1 second before flipping back
+            //wait 1.25 seconds before flipping back
             setTimeout(() => {
                 BOARD.hideAllNotWon({} as Card);
                 if (BOARD.mode == 'dual') {
                     switchPlayers();
                 }
-            }, 1000);
+            }, 1250);
         } else {
             BOARD.hideAllNotWon(card);
         }
     }
     if (BOARD.mode == 'single') {
         TITLE.innerHTML =
-            'Coups :' + ((counter - (counter % 2)) / 2).toString();
+            'Moves :' + ((counter - (counter % 2)) / 2).toString();
     }
 
     counter++;
@@ -153,10 +158,17 @@ function getEndMessage() {
             PLAYER1.getScore().toString() +
             ' points.';
     } else {
-        message =
-            'It was a tie! Both players have ' +
-            PLAYER1.getScore().toString() +
-            ' points.';
+        if (BOARD.mode == 'dual') {
+            message =
+                'It was a tie! Both players have ' +
+                PLAYER1.getScore().toString() +
+                ' points.';
+        } else {
+            message =
+                'You won in ' +
+                ((counter - (counter % 2)) / 2).toString() +
+                ' moves!';
+        }
     }
     return message;
 }

@@ -1,5 +1,5 @@
 /*The class representing a card in the game*/
-import { CARD_BACK, rotate } from './constants';
+import { CARDS_PATH, CARD_BACK, rotate } from './constants';
 import { play } from '../main';
 
 export class Card {
@@ -12,7 +12,7 @@ export class Card {
         this.revealed = false;
         this.name = name;
         this.won = false;
-        this.image = './assets/cards/' + name + '.png';
+        this.image = CARDS_PATH + name + '.png';
         const cardElement = document.createElement('img');
         this.elementImage = cardElement;
         this.elementImage.id = 'back';
