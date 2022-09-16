@@ -41,22 +41,28 @@
 }
 
 .card {
-    background-color: white;
     border: 2px solid black;
     border-radius: 10px;
 }
 
+#front {
+    background-color: #524f4f;
+}
+
+#back {
+    background-color: #ffffff;
+}
+
 #board {
-    width: 1000px;
+    width: 950px;
     height: 650px;
     display: grid;
     /*put items in rows*/
     grid-template-columns: repeat(4, 1fr);
     border: 5px solid transparent;
-    padding: 10px;
     border-image: url("../assets/images/border.png") 11 round;
     border-image-width: 12px;
-    border-image-outset: 4px;
+    border-image-outset: 3px;
     background-image: url("../assets/images/bg-board.jpg");
     background-size: 100% 100%;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
@@ -82,8 +88,8 @@
 }
 
 img {
-    max-width: 85%;
-    max-height: 85%;
+    max-width: 80%;
+    max-height: 80%;
 }
 
 #back:hover {
@@ -118,7 +124,7 @@ h2 {
     cursor: pointer;
     color: #000000;
     font-family: 'OnePiece';
-    font-size: 4em;
+    font-size: 5em;
     padding: 5px 9px;
     text-decoration: none;
     margin: 40px;
@@ -141,6 +147,11 @@ label {
 input,
 select {
     font-size: 2.5em;
+    background-color: rgba(255, 255, 255, 0.3);
+    border: 1px solid black;
+    border-radius: 10px;
+    outline: none;
+    justify-content: center;
 }
 
 .hidden {
