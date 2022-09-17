@@ -5,11 +5,13 @@ export class Player {
     score: number;
     playing: boolean;
     scoreHTML: HTMLElement;
-    constructor(scoreHTML: HTMLElement) {
+    nameElement: HTMLElement;
+    constructor(scoreHTML: HTMLElement, nameElement: HTMLElement) {
         this.name = '';
         this.score = 0;
         this.playing = false;
         this.scoreHTML = scoreHTML;
+        this.nameElement = nameElement;
     }
 
     // Add a point to the player's score
@@ -33,10 +35,12 @@ export class Player {
 
     stopPlaying() {
         this.playing = false;
+        this.nameElement.classList.remove('playing');
     }
 
     startPlaying() {
         TITLE.innerHTML = this.name + ' is playing';
+        this.nameElement.classList.add('playing');
         this.playing = true;
     }
 

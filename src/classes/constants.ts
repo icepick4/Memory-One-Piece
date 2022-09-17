@@ -70,8 +70,8 @@ export const SOUNDS_PATH: string = './assets/sounds/';
 
 export const CARD_BACK: string = './assets/cards/luffy.png';
 
-export const PLAYER1: Player = new Player(SCORE1);
-export const PLAYER2: Player = new Player(SCORE2);
+export const PLAYER1: Player = new Player(SCORE1, PLAYER1SCORE);
+export const PLAYER2: Player = new Player(SCORE2, PLAYER2SCORE);
 
 export const BOARD: Board = new Board();
 

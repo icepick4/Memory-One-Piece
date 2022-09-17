@@ -133,15 +133,40 @@ export class Board {
     }
 
     initDimension() {
+        let checkMobile: boolean;
+        if (
+            /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+                navigator.userAgent
+            )
+        ) {
+            checkMobile = true;
+        } else {
+            checkMobile = false;
+        }
         if (this.difficulty === 1) {
-            this.width = 4;
-            this.height = 3;
+            if (!checkMobile) {
+                this.width = 4;
+                this.height = 3;
+            } else {
+                this.width = 3;
+                this.height = 4;
+            }
         } else if (this.difficulty === 2) {
-            this.width = 5;
-            this.height = 4;
+            if (!checkMobile) {
+                this.width = 5;
+                this.height = 4;
+            } else {
+                this.width = 4;
+                this.height = 5;
+            }
         } else if (this.difficulty === 3) {
-            this.width = 6;
-            this.height = 5;
+            if (!checkMobile) {
+                this.width = 6;
+                this.height = 5;
+            } else {
+                this.width = 5;
+                this.height = 6;
+            }
         } else {
             console.log('Error with difficulty init');
         }
