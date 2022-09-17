@@ -12,7 +12,6 @@ import {
     TITLE,
     SCORE1,
     SCORE2,
-    rotate,
     CHECKBOX,
     DUAL_MODE_TAGS,
     SOUNDS_CHARACTERS_PATH
@@ -26,7 +25,7 @@ START.addEventListener('click', () => {
 });
 
 CHECKBOX.addEventListener('change', () => {
-    if (CHECKBOX.checked) {
+    if (!CHECKBOX.checked) {
         for (let i = 0; i < DUAL_MODE_TAGS.length; i++) {
             DUAL_MODE_TAGS[i].classList.add('hidden');
         }
@@ -43,7 +42,6 @@ function init() {
     PLAYER2.setName(PLAYER2NAME.value);
     PLAYER1SCORE.innerHTML = PLAYER1.name;
     PLAYER2SCORE.innerHTML = PLAYER2.name;
-
     BOARD.initPlaying(difficulty);
     if (BOARD.mode == 'dual') {
         PLAYER1.startPlaying();

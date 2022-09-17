@@ -16,12 +16,12 @@
 
     <div class="container">
         <form class="params">
-            <label for="mode">Play solo</label>
+            <label for="mode">Two player mode</label>
             <input id="checkbox" type="checkbox" name="mode">
-            <label class="dual-mode" for="player1">Player 1 : </label>
-            <input class="dual-mode" type="text" id="player1" name="player1" value="Player 1">
-            <label class="dual-mode" for="player2">Player 2 : </label>
-            <input class="dual-mode" type="text" id="player2" name="player2" value="Player 2">
+            <label class="dual-mode hidden" for="player1">Player 1 : </label>
+            <input class="dual-mode hidden" type="text" id="player1" name="player1" value="Player 1">
+            <label class="dual-mode hidden" for="player2">Player 2 : </label>
+            <input class="dual-mode hidden" type="text" id="player2" name="player2" value="Player 2">
             <label for="difficulty">Difficulty : </label>
             <select name="difficulty" id="difficulty">
                 <option value="easy">Easy</option>
@@ -34,14 +34,14 @@
         <div id="board">
         </div>
         <div class="scores">
-            <h2 id="player1Score" class="dual-mode">Player 1</h2>
-            <div class="score-text dual-mode">
+            <h2 id="player1Score" class="dual-mode hidden">Player 1</h2>
+            <div class="score-text dual-mode hidden">
                 <label>Score :</label>
                 <span id="score1">0</span>
             </div>
 
-            <h2 id="player2Score" class="dual-mode">Player 2</h2>
-            <div class="score-text dual-mode">
+            <h2 id="player2Score" class="dual-mode hidden">Player 2</h2>
+            <div class="score-text dual-mode hidden">
                 <label>Score :</label>
                 <span id="score2">0</span>
             </div>
