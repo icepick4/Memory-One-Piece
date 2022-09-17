@@ -1,5 +1,10 @@
 /*The class representing a card in the game*/
-import { CARDS_PATH, CARD_BACK, rotate } from './constants';
+import {
+    CARDS_PATH,
+    CARD_BACK,
+    rotate,
+    SOUNDS_EFFECTS_PATH
+} from './constants';
 import { play } from '../main';
 
 export class Card {
@@ -26,12 +31,19 @@ export class Card {
     }
 
     reveal() {
+        let audio = new Audio(SOUNDS_EFFECTS_PATH + 'card_flip.mp3');
+        audio.volume = 0.7;
+        audio.play();
         this.elementImage.src = this.image;
         this.elementImage.id = 'front';
         this.revealed = true;
+        rotate(this, 300);
     }
 
     hide() {
+        let audio = new Audio(SOUNDS_EFFECTS_PATH + 'card_flip_back.mp3');
+        audio.volume = 0.7;
+        audio.play();
         this.revealed = false;
         this.elementImage.src = CARD_BACK;
         this.elementImage.id = 'back';

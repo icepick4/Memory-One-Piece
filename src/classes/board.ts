@@ -1,6 +1,12 @@
 /*Class representing the board containg Cards*/
 import { Card } from './card';
-import { BOARD_CONTAINER, CARDS_NAMES, CHECKBOX } from './constants';
+import {
+    BOARD_CONTAINER,
+    CARDS_NAMES,
+    CHECKBOX,
+    SOUNDS_CHARACTERS_PATH,
+    SOUNDS_EFFECTS_PATH
+} from './constants';
 export class Board {
     cards: Card[];
     revealedCards: Card[];
@@ -23,6 +29,8 @@ export class Board {
     }
 
     initPlaying(difficulty: number) {
+        let audio = new Audio(SOUNDS_EFFECTS_PATH + 'starting.mp3');
+        audio.play();
         this.difficulty = difficulty;
         this.initCardsArray();
         this.initCardsImages(this.cards);

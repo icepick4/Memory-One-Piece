@@ -66,7 +66,9 @@ export const CARDS_NAMES: string[] = [
 
 export const CARDS_PATH: string = './assets/cards/';
 
-export const SOUNDS_PATH: string = './assets/sounds/';
+export const SOUNDS_CHARACTERS_PATH: string = './assets/sounds/characters/';
+
+export const SOUNDS_EFFECTS_PATH: string = './assets/sounds/cards_effects/';
 
 export const CARD_BACK: string = './assets/cards/luffy.png';
 
@@ -81,7 +83,7 @@ export const TITLE: HTMLElement = document.getElementById(
 
 export function rotate(card: Card, speed: number) {
     card.elementImage.style.transform = 'rotateY(180deg)';
-    const rotating = setTimeout(() => {
+    setTimeout(() => {
         card.elementImage.style.transform = 'rotateY(0deg)';
     }, speed);
 }

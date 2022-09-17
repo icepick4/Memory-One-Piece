@@ -15,7 +15,7 @@ import {
     rotate,
     CHECKBOX,
     DUAL_MODE_TAGS,
-    SOUNDS_PATH
+    SOUNDS_CHARACTERS_PATH
 } from './classes/constants';
 import { Card } from './classes/card';
 let counter = 1;
@@ -53,13 +53,11 @@ function init() {
 export function play(card: Card) {
     if (!BOARD.turnEnded() && !card.revealed && !card.won) {
         card.reveal();
-        rotate(card, 300);
     } else {
         return;
     }
-    console.log(BOARD.mode);
     if (BOARD.checkCardsRevealed() != null) {
-        var audio = new Audio(SOUNDS_PATH + card.name + '.mp3');
+        let audio = new Audio(SOUNDS_CHARACTERS_PATH + card.name + '.mp3');
         audio.volume = 0.65;
         audio.play();
         if (BOARD.mode == 'dual') {
@@ -124,7 +122,6 @@ function clear() {
 
 function switchPlayers() {
     if (BOARD.mode == 'dual') {
-        console.log('oui je suis en mode dual');
         if (PLAYER1.isPlaying()) {
             PLAYER1.stopPlaying();
             PLAYER2.startPlaying();
