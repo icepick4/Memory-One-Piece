@@ -1,6 +1,5 @@
-import { Player } from './player';
-import { Board } from './board';
-import { Card } from './card';
+import { Player } from './classes/player';
+import { Board } from './classes/board';
 
 export const START: HTMLElement = document.getElementById(
     'start'
@@ -10,19 +9,19 @@ export const DIFFICULTY: HTMLSelectElement = document.getElementById(
     'difficulty'
 ) as HTMLSelectElement;
 
-export const PLAYER1NAME: HTMLInputElement = document.getElementById(
+export const INPUT_PLAYER1: HTMLInputElement = document.getElementById(
     'player1'
 ) as HTMLInputElement;
 
-export const PLAYER2NAME: HTMLInputElement = document.getElementById(
+export const INPUT_PLAYER2: HTMLInputElement = document.getElementById(
     'player2'
 ) as HTMLInputElement;
 
-export const PLAYER1SCORE: HTMLElement = document.getElementById(
+export const TITLE_PLAYER1: HTMLElement = document.getElementById(
     'player1Score'
 ) as HTMLElement;
 
-export const PLAYER2SCORE: HTMLElement = document.getElementById(
+export const TITLE_PLAYER2: HTMLElement = document.getElementById(
     'player2Score'
 ) as HTMLElement;
 
@@ -38,7 +37,7 @@ export const SCORE2: HTMLElement = document.getElementById(
     'score2'
 ) as HTMLElement;
 
-export const CHECKBOX: HTMLInputElement = document.getElementById(
+export const CHECKBOX_MODE: HTMLInputElement = document.getElementById(
     'checkbox'
 ) as HTMLInputElement;
 
@@ -70,20 +69,13 @@ export const SOUNDS_CHARACTERS_PATH: string = './assets/sounds/characters/';
 
 export const SOUNDS_EFFECTS_PATH: string = './assets/sounds/cards_effects/';
 
-export const CARD_BACK: string = './assets/cards/luffy.png';
+export const CARD_BACK_PATH: string = './assets/cards/luffy.png';
 
-export const PLAYER1: Player = new Player(SCORE1, PLAYER1SCORE);
-export const PLAYER2: Player = new Player(SCORE2, PLAYER2SCORE);
+export const PLAYER1: Player = new Player(SCORE1, TITLE_PLAYER1);
+export const PLAYER2: Player = new Player(SCORE2, TITLE_PLAYER2);
 
 export const BOARD: Board = new Board();
 
 export const TITLE: HTMLElement = document.getElementById(
     'title'
 ) as HTMLElement;
-
-export function rotate(card: Card, speed: number) {
-    card.elementImage.style.transform = 'rotateY(180deg)';
-    setTimeout(() => {
-        card.elementImage.style.transform = 'rotateY(0deg)';
-    }, speed);
-}

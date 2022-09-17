@@ -1,12 +1,14 @@
 /*Class representing the board containg Cards*/
-import { Card } from './card';
 import {
     BOARD_CONTAINER,
     CARDS_NAMES,
-    CHECKBOX,
-    SOUNDS_CHARACTERS_PATH,
+    CHECKBOX_MODE,
     SOUNDS_EFFECTS_PATH
-} from './constants';
+} from '../constants';
+
+import { Card } from './card';
+import { audio } from '../functions';
+
 export class Board {
     cards: Card[];
     revealedCards: Card[];
@@ -25,12 +27,11 @@ export class Board {
         this.cards = [];
         this.revealedCards = [];
         this.wonCards = [];
-        this.mode = CHECKBOX.checked ? 'dual' : 'single';
+        this.mode = CHECKBOX_MODE.checked ? 'dual' : 'single';
     }
 
     initPlaying(difficulty: number) {
-        let audio = new Audio(SOUNDS_EFFECTS_PATH + 'starting.mp3');
-        audio.play();
+        audio(SOUNDS_EFFECTS_PATH + 'starting.mp3', 1);
         this.difficulty = difficulty;
         this.initCardsArray();
         this.initCardsImages(this.cards);
@@ -190,6 +191,6 @@ export class Board {
             BOARD_CONTAINER.removeChild(card.elementImage);
         });
         this.cards = [];
-        this.mode = CHECKBOX.checked ? 'dual' : 'single';
+        this.mode = CHECKBOX_MODE.checked ? 'dual' : 'single';
     }
 }

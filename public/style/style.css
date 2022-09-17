@@ -98,7 +98,7 @@ img {
 #back:hover {
     cursor: pointer;
     /*effect on the image on hover*/
-    scale: 1.08;
+    scale: 1.12;
 }
 
 #back {
@@ -107,7 +107,7 @@ img {
 }
 
 .transition {
-    transition: 0.5s;
+    transition: 0.4s;
 }
 
 h1 {

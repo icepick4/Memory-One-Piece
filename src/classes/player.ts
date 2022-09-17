@@ -1,4 +1,4 @@
-import { TITLE } from './constants';
+import { TITLE } from '../constants';
 
 export class Player {
     name: string;
