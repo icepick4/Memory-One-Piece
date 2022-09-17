@@ -211,10 +211,15 @@ span {
     body {
         overflow-y: visible;
         overflow-x: visible;
+        background-image: url("../assets/images/bg_phone.jpg");
     }
 
     .scores {
         align-items: center;
 
+    }
+
+    #board {
+        background-size: 100% 50%;
     }
 }
