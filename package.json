@@ -27,7 +27,7 @@
   "homepage": "https://github.com/icepick4/Memory-One-Piece#readme",
   "dependencies": {
     "fs": "^0.0.1-security",
-    "nodemon": "^2.0.19",
+    "nodemon": "^2.0.20",
     "tsc": "^2.0.4"
   },
   "devDependencies": {
