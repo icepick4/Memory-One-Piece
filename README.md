@@ -24,3 +24,14 @@ Translated from [wikipedia](https://fr.wikipedia.org/wiki/Jeu_de_paires)
 3.  Finnaly, give me some feedback ! (errors, upgrades, ideas)
 
 ## Screenshots
+
+### Single player with Easy mode :
+![Screenshot_1](https://user-images.githubusercontent.com/82316285/198278396-4156b094-4b71-476e-a8c2-68b3f3baec74.png)
+
+### Single player with Hard mode : 
+![Screenshot_2](https://user-images.githubusercontent.com/82316285/198278547-cd0d3ab9-d683-4583-a2b0-5d7e643f1c58.png)
+
+### Multi player with hard mode after finding one pair : 
+![Screenshot_3](https://user-images.githubusercontent.com/82316285/198278798-a8a00500-d823-490b-bcf5-e9a6128ccbb0.png)
+
+
