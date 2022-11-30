@@ -6,8 +6,8 @@ import {
     SOUNDS_EFFECTS_PATH
 } from '../constants';
 
-import { Card } from './card';
 import { audio } from '../functions';
+import { Card } from './card';
 
 export class Board {
     cards: Card[];
@@ -40,7 +40,12 @@ export class Board {
         this.playing = true;
     }
 
-    //hide all cards except the won ones and the one passed in parameter
+    /**
+     *
+     * @param cardClicked
+     * @description hide all cards except the won ones and the one passed in parameter
+     * @returns return true if the card passed in parameter is hidden
+     */
     hideAllNotWon(cardClicked: Card) {
         let hide: boolean = false;
         this.cards.forEach((card) => {
@@ -120,6 +125,10 @@ export class Board {
         });
     }
 
+    /**
+     * @description Init the cards array
+     * set the cards array depending on the difficulty set before in {@link initPlaying()}
+     */
     initCardsArray() {
         let nbCards: number =
             ((this.difficulty + 3) * (this.difficulty + 2)) / 2;
@@ -181,6 +190,10 @@ export class Board {
         }
     }
 
+    /**
+     * @description Init the board grid
+     * set the grid of the board depending on width and height set before in {@link initDimension()}
+     */
     initBoardGrid() {
         BOARD_CONTAINER.style.gridTemplateColumns = `repeat(${this.width}, 1fr)`;
         BOARD_CONTAINER.style.gridTemplateRows = `repeat(${this.height}, 1fr)`;

@@ -78,6 +78,7 @@ export function play(card: Card) {
             return;
         }
     } else {
+        //check if its the second card flipped
         if (counter % 2 == 0) {
             //wait 1.25 seconds before flipping back
             setTimeout(() => {
@@ -94,7 +95,6 @@ export function play(card: Card) {
         TITLE.innerHTML =
             'Moves :' + ((counter - (counter % 2)) / 2).toString();
     }
-
     counter++;
 }
 

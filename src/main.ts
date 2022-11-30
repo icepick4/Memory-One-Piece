@@ -1,18 +1,18 @@
 import {
-    START,
-    DIFFICULTY,
-    INPUT_PLAYER1,
-    INPUT_PLAYER2,
-    TITLE_PLAYER1,
-    TITLE_PLAYER2,
-    PLAYER1,
-    PLAYER2,
     BOARD,
     CHECKBOX_MODE,
-    DUAL_MODE_TAGS
+    DIFFICULTY,
+    DUAL_MODE_TAGS,
+    INPUT_PLAYER1,
+    INPUT_PLAYER2,
+    PLAYER1,
+    PLAYER2,
+    START,
+    TITLE_PLAYER1,
+    TITLE_PLAYER2
 } from './constants';
 
-import { getDifficulty, clear } from './functions';
+import { clear, getDifficulty } from './functions';
 
 START.addEventListener('click', () => {
     clear();
@@ -20,6 +20,7 @@ START.addEventListener('click', () => {
 });
 
 CHECKBOX_MODE.addEventListener('change', () => {
+    //change between single and dual mode
     if (!CHECKBOX_MODE.checked) {
         for (let i = 0; i < DUAL_MODE_TAGS.length; i++) {
             DUAL_MODE_TAGS[i].classList.add('hidden');
