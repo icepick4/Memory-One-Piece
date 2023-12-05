@@ -14,7 +14,6 @@ export class Player {
         this.nameElement = nameElement;
     }
 
-    // Add a point to the player's score
     addPoint() {
         this.score++;
         this.scoreHTML.innerHTML = this.score.toString();
@@ -28,7 +27,6 @@ export class Player {
         return this.name;
     }
 
-    // Set the player's name
     setName(name: string) {
         this.name = name;
     }

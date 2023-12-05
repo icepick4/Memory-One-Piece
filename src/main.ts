@@ -7,6 +7,7 @@ import {
     INPUT_PLAYER2,
     PLAYER1,
     PLAYER2,
+    SOUND_MODE,
     START,
     TITLE_PLAYER1,
     TITLE_PLAYER2
@@ -29,6 +30,15 @@ CHECKBOX_MODE.addEventListener('change', () => {
         for (let i = 0; i < DUAL_MODE_TAGS.length; i++) {
             DUAL_MODE_TAGS[i].classList.remove('hidden');
         }
+    }
+});
+
+SOUND_MODE.addEventListener('change', () => {
+    //change between single and dual mode
+    if (!SOUND_MODE.checked) {
+        BOARD.sound = false;
+    } else {
+        BOARD.sound = true;
     }
 });
 

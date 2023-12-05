@@ -74,22 +74,6 @@
 
 }
 
-#checkbox {
-    /*checkbox parameters*/
-    width: 30px;
-    height: 30px;
-    border: 1px solid black;
-    border-radius: 5px;
-    background-color: white;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
-    cursor: pointer;
-}
-
-#checkbox:hover {
-    /*change color*/
-    background-color: #f5f5f5;
-}
-
 .card {
     max-width: 80%;
     max-height: 80%;
@@ -211,8 +195,53 @@ span {
     top: 0;
     right: 0;
     align-items: center;
+    justify-items: center;
     font-size: 2.5em;
+    gap: 2rem;
 }
+
+.sound {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 24px;
+    height: 24px;
+    border: 2px solid #aaa;
+    background-color: #fff;
+    border-radius: 4px;
+    outline: none;
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+input[type="checkbox"]:checked {
+    background-color: #4CAF50;
+    border-color: #4CAF50;
+}
+
+input[type="checkbox"]::before {
+    content: '\2713';
+    display: block;
+    width: 100%;
+    height: 100%;
+    font-size: 16px;
+    color: #fff;
+    text-align: center;
+    line-height: 24px;
+    visibility: hidden;
+    transition: visibility 0.3s;
+}
+
+input[type="checkbox"]:checked::before {
+    visibility: visible;
+}
+
 
 .links a {
     text-decoration: none;
@@ -227,29 +256,37 @@ span {
     text-decoration: underline;
 }
 
-.links img:hover {
+.links #github:hover {
     opacity: 1;
-    -webkit-animation: flash 0.3s;
-    animation: flash 0.3s;
+    -webkit-animation: hover-img 0.3s;
+    animation: hover-img 0.3s;
 }
 
-@-webkit-keyframes flash {
+@-webkit-keyframes hover-img {
     0% {
-        scale: 1.2;
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.2);
     }
 
     100% {
-        scale: 1;
+        transform: scale(1);
     }
 }
 
-@keyframes flash {
+@keyframes hover-img {
     0% {
-        scale: 1.2;
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.2);
     }
 
     100% {
-        scale: 1;
+        transform: scale(1);
     }
 }
 

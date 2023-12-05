@@ -1,5 +1,5 @@
-import { Player } from './classes/player';
 import { Board } from './classes/board';
+import { Player } from './classes/player';
 
 export const START: HTMLElement = document.getElementById(
     'start'
@@ -39,6 +39,10 @@ export const SCORE2: HTMLElement = document.getElementById(
 
 export const CHECKBOX_MODE: HTMLInputElement = document.getElementById(
     'checkbox'
+) as HTMLInputElement;
+
+export const SOUND_MODE: HTMLInputElement = document.getElementById(
+    'sound'
 ) as HTMLInputElement;
 
 export const DUAL_MODE_TAGS: HTMLCollection = document.getElementsByClassName(

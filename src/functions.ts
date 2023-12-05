@@ -24,7 +24,10 @@ export function rotate(card: Card, speed: number) {
     }, speed);
 }
 
-export function audio(src: string, volume: number) {
+export function audio(src: string, volume: number, sound_mode: boolean) {
+    if (!sound_mode) {
+        return;
+    }
     let audio = new Audio(src);
     audio.volume = volume;
     audio.play();
@@ -65,7 +68,7 @@ export function play(card: Card) {
         return;
     }
     if (BOARD.checkCardsRevealed() != null) {
-        audio(SOUNDS_CHARACTERS_PATH + card.name + '.mp3', 0.7);
+        audio(SOUNDS_CHARACTERS_PATH + card.name + '.mp3', 0.7, BOARD.sound);
         if (BOARD.mode == 'dual') {
             if (PLAYER1.isPlaying()) {
                 PLAYER1.addPoint();

@@ -3,7 +3,8 @@ import {
     BOARD_CONTAINER,
     CARDS_NAMES,
     CHECKBOX_MODE,
-    SOUNDS_EFFECTS_PATH
+    SOUNDS_EFFECTS_PATH,
+    SOUND_MODE
 } from '../constants';
 
 import { audio } from '../functions';
@@ -18,6 +19,7 @@ export class Board {
     height: number;
     playing: boolean;
     mode: string;
+    sound: boolean;
 
     constructor() {
         this.difficulty = 0;
@@ -28,10 +30,11 @@ export class Board {
         this.revealedCards = [];
         this.wonCards = [];
         this.mode = CHECKBOX_MODE.checked ? 'dual' : 'single';
+        this.sound = SOUND_MODE.checked ? true : false;
     }
 
     initPlaying(difficulty: number) {
-        audio(SOUNDS_EFFECTS_PATH + 'starting.mp3', 1);
+        audio(SOUNDS_EFFECTS_PATH + 'starting.mp3', 1, this.sound);
         this.difficulty = difficulty;
         this.initCardsArray();
         this.initCardsImages(this.cards);
